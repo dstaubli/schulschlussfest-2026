@@ -350,6 +350,76 @@ h1::after {
 .item:hover .item-price { text-shadow: 0 0 20px currentColor; }
 .item-depot { font-size: 0.75rem; color: rgba(255,255,255,0.5); display: block; margin-top: 0.2rem; font-weight: 500; }
 
+/* ── COMBO ITEM (for drinks with two sizes) ── */
+.item-combo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+.item-combo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.item-combo:hover::after { opacity: 1; }
+.item-combo::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.item-combo:hover {
+  background: var(--glass2);
+  transform: translateX(6px);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+.item-combo:hover::before { opacity: 1; }
+
+.section-cyan .item-combo { color: var(--cyan); }
+.section-pink .item-combo { color: var(--pink); }
+.section-gold .item-combo { color: var(--gold); }
+
+.combo-item-info { flex: 0 0 100%; min-width: 0; }
+.combo-item-name  { font-size: 0.95rem; font-weight: 400; color: rgba(255,255,255,0.92); display: block; }
+.combo-drinks { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+.combo-drink-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+.combo-drink-size { color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+.combo-price { 
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; 
+  letter-spacing: 0.04em;
+  line-height: 1; 
+  color: #fff;
+  transition: text-shadow 0.3s;
+}
+.item-combo:hover .combo-price { text-shadow: 0 0 20px currentColor; }
+
 /* ── ELTERNRATSSTAND GROUP ── */
 .eltern-group {
   border: 1px solid rgba(255,208,96,0.28);
@@ -528,8 +598,36 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
         Gemäss Jugendschutzkonzept
       </span>
       <div class="items">
-        <div class="item"><div class="item-info"><span class="item-name">Natur, Citro, Orange, Rivella</span><span class="item-size">3 dl</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
-        <div class="item"><div class="item-info"><span class="item-name">Cola, Cola Zero, Ice Tea</span><span class="item-size">1.5 l</span></div><div class="item-price-wrap"><span class="item-price">9.–</span></div></div>
+        <div class="item-combo">
+          <div class="combo-item-info">
+            <span class="combo-item-name">Natur, Citro, Orange, Rivella</span>
+            <div class="combo-drinks">
+              <div class="combo-drink-row">
+                <span class="combo-drink-size">3 dl</span>
+                <span class="combo-price">3.–</span>
+              </div>
+              <div class="combo-drink-row">
+                <span class="combo-drink-size">1.5 l</span>
+                <span class="combo-price">9.–</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item-combo">
+          <div class="combo-item-info">
+            <span class="combo-item-name">Cola, Cola Zero, Ice Tea</span>
+            <div class="combo-drinks">
+              <div class="combo-drink-row">
+                <span class="combo-drink-size">3 dl</span>
+                <span class="combo-price">3.–</span>
+              </div>
+              <div class="combo-drink-row">
+                <span class="combo-drink-size">1.5 l</span>
+                <span class="combo-price">9.–</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="item"><div class="item-info"><span class="item-name">Alkoholfreies Bier</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">4.–</span></div></div>
         <div class="item"><div class="item-info"><span class="item-name">Bier (mit Alkohol)</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">5.–</span></div></div>
         <div class="item"><div class="item-info"><span class="item-name">Wein (Flasche)</span><span class="item-size">5 dl</span></div><div class="item-price-wrap"><span class="item-price">14.–</span></div></div>
@@ -646,7 +744,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
-      e.target.querySelectorAll('.item').forEach((item, i) => {
+      e.target.querySelectorAll('.item, .item-combo').forEach((item, i) => {
         item.style.opacity = '0';
         item.style.transform = 'translateX(-14px)';
         setTimeout(() => {
