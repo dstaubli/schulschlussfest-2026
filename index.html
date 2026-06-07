@@ -95,7 +95,6 @@ body {
 }
 .disco-ball-img div { border: 0.5px solid rgba(0,0,0,0.3); }
 
-/* sparkle rays around ball */
 .ball-rays {
   position: absolute;
   inset: -40px;
@@ -135,7 +134,6 @@ h1 {
   animation: titleShimmer 4s ease-in-out infinite alternate;
   position: relative;
 }
-/* animated shimmer sweep across title */
 h1::after {
   content: 'Disco';
   position: absolute;
@@ -250,7 +248,6 @@ h1::after {
 .section-title.pink { color: var(--pink); text-shadow: 0 0 30px rgba(255,32,112,0.6); }
 .section-title.gold { color: var(--gold); text-shadow: 0 0 30px rgba(255,208,96,0.6); }
 
-/* payment badge */
 .payment-badge {
   display: inline-flex;
   align-items: center;
@@ -266,7 +263,6 @@ h1::after {
   position: relative;
   overflow: hidden;
 }
-/* shimmer sweep on badges */
 .payment-badge::after {
   content: '';
   position: absolute;
@@ -303,7 +299,6 @@ h1::after {
   position: relative;
   overflow: hidden;
 }
-/* shimmer sweep on hover */
 .item::after {
   content: '';
   position: absolute;
@@ -314,7 +309,6 @@ h1::after {
   pointer-events: none;
 }
 .item:hover::after { opacity: 1; }
-/* colour accent bar */
 .item::before {
   content: '';
   position: absolute;
@@ -338,7 +332,20 @@ h1::after {
 .section-gold .item { color: var(--gold); }
 
 .item-info { flex: 1; min-width: 0; }
-.item-name  { font-size: 0.95rem; font-weight: 400; color: rgba(255,255,255,0.92); display: block; }
+.item-name  {
+  font-size: 0.95rem; font-weight: 400;
+  color: rgba(255,255,255,0.92); display: block;
+}
+.item-emoji {
+  font-size: 1.1rem;
+  margin-right: 0.45rem;
+  display: inline-block;
+  vertical-align: -0.1em;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+  transition: transform 0.25s;
+}
+.item:hover .item-emoji { transform: scale(1.25) rotate(-8deg); }
+
 .item-size  { font-size: 0.85rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; margin-top: 0.15rem; display: block; }
 .item-price-wrap { text-align: right; white-space: nowrap; flex-shrink: 0; }
 .item-price {
@@ -350,7 +357,7 @@ h1::after {
 .item:hover .item-price { text-shadow: 0 0 20px currentColor; }
 .item-depot { font-size: 0.75rem; color: rgba(255,255,255,0.5); display: block; margin-top: 0.2rem; font-weight: 500; }
 
-/* ── COMBO ITEM (for drinks with two sizes) ── */
+/* ── COMBO ITEM ── */
 .item-combo {
   display: flex;
   align-items: center;
@@ -410,11 +417,11 @@ h1::after {
   font-size: 0.9rem;
 }
 .combo-drink-size { color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
-.combo-price { 
+.combo-price {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   letter-spacing: 0.04em;
-  line-height: 1; 
+  line-height: 1;
   color: #fff;
   transition: text-shadow 0.3s;
 }
@@ -437,7 +444,6 @@ h1::after {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .eltern-group.visible { opacity: 1; transform: none; }
-/* animated gold border glow */
 .eltern-group::before {
   content: '';
   position: absolute;
@@ -525,7 +531,7 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
   <p class="hero-sub">Ein Abend voller Genuss</p>
   <div class="hero-event">
     <span class="hero-event-name">Schulschlussfest 2026</span>
-    <a class="hero-event-school" href="https://www.schulewangental.ch/schule-niederwangen-juch.html" target="_blank" rel="noopener">Schule Niederwangen Juch</a>
+    <a class="hero-event-school" href="https://www.schulewangental.ch/schule-niederwangen-juch.html" target="_blank" rel="noopener">Schulhaus Juch · Niederwangen</a>
   </div>
 </section>
 
@@ -544,15 +550,15 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
       Nur Barbezahlung
     </span>
     <div class="items">
-      <div class="item"><div class="item-info"><span class="item-name">Bauernhofglace</span></div><div class="item-price-wrap"><span class="item-price">4.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Popcorn</span></div><div class="item-price-wrap"><span class="item-price">1.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Hot Dog</span><span class="item-size">Pouletwürstli &amp; Vegiwürstli</span></div><div class="item-price-wrap"><span class="item-price">5.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Diverse Salate</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Waffeln</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Pancakes</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Kaffee</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Mocktails</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
-      <div class="item"><div class="item-info"><span class="item-name">Sirupbar</span></div><div class="item-price-wrap"><span class="item-price">2.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍦</span>Bauernhofglace</span></div><div class="item-price-wrap"><span class="item-price">4.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍿</span>Popcorn</span></div><div class="item-price-wrap"><span class="item-price">1.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🌭</span>Hot Dog</span><span class="item-size">Pouletwürstli &amp; Vegiwürstli</span></div><div class="item-price-wrap"><span class="item-price">5.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🥗</span>Diverse Salate</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🧇</span>Waffeln</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🥞</span>Pancakes</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">☕</span>Kaffee</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍹</span>Mocktails</span></div><div class="item-price-wrap"><span class="item-price">3.–</span></div></div>
+      <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍯</span>Sirupbar</span></div><div class="item-price-wrap"><span class="item-price">2.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
     </div>
   </div>
 
@@ -580,10 +586,10 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
         <div class="section-line right" style="color:var(--gold)"></div>
       </div>
       <div class="items">
-        <div class="item"><div class="item-info"><span class="item-name">Pommes Frites</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
-        <div class="item"><div class="item-info"><span class="item-name">Bratwurst (Kalb)</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
-        <div class="item"><div class="item-info"><span class="item-name">Hamburger (Rind)</span></div><div class="item-price-wrap"><span class="item-price">9.–</span></div></div>
-        <div class="item"><div class="item-info"><span class="item-name">Paella mit Gemüse</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍟</span>Pommes Frites</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🌭</span>Bratwurst (Kalb)</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍔</span>Hamburger (Rind)</span></div><div class="item-price-wrap"><span class="item-price">9.–</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🥘</span>Paella mit Gemüse</span></div><div class="item-price-wrap"><span class="item-price">7.–</span></div></div>
       </div>
     </div>
 
@@ -600,7 +606,7 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
       <div class="items">
         <div class="item-combo">
           <div class="combo-item-info">
-            <span class="combo-item-name">Natur, Citro, Orange, Rivella, Cola, Cola Zero, Ice Tea</span>
+            <span class="combo-item-name"><span class="item-emoji">🥤</span>Natur, Citro, Orange, Rivella, Cola, Cola Zero, Ice Tea</span>
             <div class="combo-drinks">
               <div class="combo-drink-row">
                 <span class="combo-drink-size">3 dl</span>
@@ -613,10 +619,9 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
             </div>
           </div>
         </div>
-        
-        <div class="item"><div class="item-info"><span class="item-name">Alkoholfreies Bier</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">4.–</span></div></div>
-        <div class="item"><div class="item-info"><span class="item-name">Bier (mit Alkohol)</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">5.–</span></div></div>
-        <div class="item"><div class="item-info"><span class="item-name">Wein (Flasche)</span><span class="item-size">5 dl</span></div><div class="item-price-wrap"><span class="item-price">14.–</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍺</span>Alkoholfreies Bier</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">4.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍺</span>Bier (mit Alkohol)</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">5.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
+        <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍷</span>Wein (Flasche)</span><span class="item-size">5 dl</span></div><div class="item-price-wrap"><span class="item-price">14.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
       </div>
     </div>
 
@@ -626,7 +631,7 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
 
 <footer>
   <div class="footer-title">Viel Spass!</div>
-  <p>Schulschlussfest 2026 &nbsp;·&nbsp; Schule Niederwangen Juch</p>
+  <p>Schulschlussfest 2026 &nbsp;·&nbsp; Schulhaus Juch &nbsp;·&nbsp; Niederwangen</p>
 </footer>
 
 <script>
@@ -652,7 +657,6 @@ function resize() { W = canvas.width = window.innerWidth; H = canvas.height = wi
 resize();
 window.addEventListener('resize', resize);
 
-// more particles, more varied sizes
 for (let i = 0; i < 180; i++) {
   particles.push({
     x: Math.random()*W, y: Math.random()*H,
@@ -663,7 +667,6 @@ for (let i = 0; i < 180; i++) {
   });
 }
 
-// more beams, faster
 const beamColors = ['#00f0ff','#ff2070','#ffd060','#a855f7','#00ff99','#ff6030'];
 for (let i = 0; i < 10; i++) {
   beams.push({
@@ -680,7 +683,6 @@ function draw() {
   ctx.clearRect(0,0,W,H);
   const t = Date.now()/4000;
 
-  // ambient orbs — more, more varied
   [
     { x:.25, y:.3,  c:'#9b30ff', r:.45 },
     { x:.75, y:.6,  c:'#ff2070', r:.38 },
@@ -697,7 +699,6 @@ function draw() {
     ctx.fillStyle = gr; ctx.fillRect(0,0,W,H);
   });
 
-  // beams from hero center
   const bx = W/2, by = H*0.18;
   beams.forEach(b => {
     b.angle += b.speed;
@@ -710,7 +711,6 @@ function draw() {
     ctx.globalAlpha = 1;
   });
 
-  // particles with pulsing size
   particles.forEach(p => {
     p.x += p.vx; p.y += p.vy;
     p.pulse += p.pulseSpeed;
