@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disco Speisekarte 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cyan:   #00f0ff;
+  --pink:   #ff2070;
+  --gold:   #ffd060;
+  --purple: #a855f7;
+  --dark:   #05000f;
+  --glass:  rgba(255,255,255,0.05);
+  --glass2: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── CANVAS BACKGROUND ─── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.disco-ball-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 2rem;
+}
+
+.disco-ball-wrap::before,
+.disco-ball-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  animation: ballGlow 3s ease-in-out infinite alternate;
+}
+.disco-ball-wrap::before {
+  background: radial-gradient(circle, rgba(0,240,255,0.25) 0%, transparent 70%);
+}
+.disco-ball-wrap::after {
+  background: radial-gradient(circle, rgba(255,32,112,0.2) 0%, transparent 70%);
+  animation-delay: 1.5s;
+}
+@keyframes ballGlow {
+  from { transform: scale(0.9); opacity: 0.6; }
+  to   { transform: scale(1.1); opacity: 1; }
+}
+
+.disco-ball-img {
+  width: 140px;
+  height: 140px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border-radius: 50%;
+  overflow: hidden;
+  animation: ballSpin 8s linear infinite;
+  box-shadow:
+    0 0 40px rgba(0,240,255,0.4),
+    0 0 80px rgba(255,32,112,0.3),
+    0 0 0 1px rgba(255,255,255,0.1);
+}
+@keyframes ballSpin {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(360deg); }
+}
+
+.disco-ball-img div {
+  background: var(--c, rgba(255,255,255,0.7));
+  border: 0.5px solid rgba(0,0,0,0.3);
+}
+
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.75rem;
+}
+
+.hero-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 2rem;
+}
+
+.hero-event-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.hero-event-school {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,240,255,0.35);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hero-event-school:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(7rem, 22vw, 14rem);
+  line-height: 0.85;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, var(--cyan) 0%, #fff 40%, var(--pink) 70%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(0,240,255,0.5));
+  animation: titleShimmer 4s ease-in-out infinite alternate;
+}
+@keyframes titleShimmer {
+  from { filter: drop-shadow(0 0 20px rgba(0,240,255,0.4)); }
+  to   { filter: drop-shadow(0 0 60px rgba(255,32,112,0.5)); }
+}
+
+.hero-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.15em;
+  margin-top: 1rem;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.35;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+.scroll-hint svg { width: 16px; height: 16px; }
+
+/* ─── MENU CONTENT ─── */
+.menu {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+/* ─── SECTION ─── */
+.section {
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: none; }
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+  opacity: 0.25;
+}
+.section-line.right {
+  background: linear-gradient(90deg, currentColor, transparent);
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.section-title.cyan   { color: var(--cyan);   text-shadow: 0 0 30px rgba(0,240,255,0.6); }
+.section-title.pink   { color: var(--pink);   text-shadow: 0 0 30px rgba(255,32,112,0.6); }
+.section-title.gold   { color: var(--gold);   text-shadow: 0 0 30px rgba(255,208,96,0.6); }
+
+.payment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.55em 1.1em;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  border: 1px solid currentColor;
+}
+.payment-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.payment-badge.cyan {
+  color: var(--cyan);
+  background: rgba(0,240,255,0.08);
+  box-shadow: 0 0 16px rgba(0,240,255,0.15);
+}
+.payment-badge.pink {
+  color: var(--pink);
+  background: rgba(255,32,112,0.08);
+  box-shadow: 0 0 16px rgba(255,32,112,0.15);
+}
+.payment-badge.gold {
+  color: var(--gold);
+  background: rgba(255,208,96,0.08);
+  box-shadow: 0 0 16px rgba(255,208,96,0.15);
+}
+
+/* ─── ITEMS GRID ─── */
+.items {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.item:hover { background: var(--glass2); transform: translateX(5px); }
+.item:hover::before { opacity: 1; }
+.item:hover { border-color: rgba(255,255,255,0.2); }
+
+.section-cyan  .item { color: var(--cyan); }
+.section-pink  .item { color: var(--pink); }
+.section-gold  .item { color: var(--gold); }
+
+.item-info { flex: 1; min-width: 0; }
+
+.item-name {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  display: block;
+}
+
+.item-size {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+  display: block;
+}
+
+.item-price-wrap {
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.item-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  display: block;
+  color: #fff;
+}
+
+.item-depot {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.3);
+  display: block;
+  margin-top: 0.1rem;
+}
+
+/* ─── FEATURED ITEM (Hamburger) ─── */
+.item.featured {
+  background: linear-gradient(135deg, rgba(255,32,112,0.12) 0%, rgba(255,208,96,0.08) 100%);
+  border-color: rgba(255,208,96,0.3);
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  margin: 2.5rem 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,240,255,0.3) 20%,
+    rgba(255,32,112,0.3) 50%,
+    rgba(255,208,96,0.3) 80%,
+    transparent 100%
+  );
+  position: relative;
+}
+.divider::after {
+  content: '✦';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  background: var(--dark);
+  padding: 0 0.75rem;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+footer p {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+footer .footer-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="disco-ball-wrap">
+    <div class="disco-ball-img" id="ball"></div>
+  </div>
+
+  <h1>Disco</h1>
+  <p class="hero-sub">Eine Nacht voller Genuss</p>
+
+  <div class="hero-event">
+    <span class="hero-event-name">Schulschlussfest 2026</span>
+    <a class="hero-event-school" href="https://www.schulewangental.ch/schule-niederwangen-juch.html" target="_blank" rel="noopener">Schule Niederwangen Juch</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Speisekarte</span>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M8 3v10M3 9l5 5 5-5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- MENU -->
+<main class="menu">
+
+  <!-- Getränke -->
+  <div class="section section-cyan" data-reveal>
+    <div class="section-label">
+      <div class="section-line" style="color:var(--cyan)"></div>
+      <span class="section-title cyan">Getränke</span>
+      <div class="section-line right" style="color:var(--cyan)"></div>
+    </div>
+    <span class="payment-badge cyan">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Gemäss Jugendschutzkonzept
+    </span>
+    <div class="items">
+      <div class="item">
+        <div class="item-info">
+          <span class="item-name">Natur, Citro, Orange, Rivella</span>
+          <span class="item-size">3 dl</span>
+        </div>
+        <div class="item-price-wrap">
+          <span class="item-price">3.–</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <span class="item-name">Cola, Cola Zéro, Ice Tea</span>
+          <span class="item-size">1.5 l</span>
+        </div>
+        <div class="item-price-wrap">
+          <span class="item-price">9.–</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <span class="item-name">Alkoholfreies Bier</span>
+          <span class="item-size">33 cl</span>
+        </div>
+        <div class="item-price-wrap">
+          <span class="item-price">4.–</span>
+          <span class="item-depot">+ 2.– Depot</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <span class="item-name">Bier (mit Alkohol)</span>
+          <span class="item-size">33 cl</span>
+        </div>
+        <div class="item-price-wrap">
+          <span class="item-price">5.–</span>
+          <span class="item-depot">+ 2.– Depot</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <span class="item-name">Wein (Flasche)</span>
+          <span class="item-size">5 dl</span>
+        </div>
+        <div class="item-price-wrap">
+          <span class="item-price">14.–</span>
+          <span class="item-depot">+ 2.– Depot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Schüler*innen Stände -->
+  <div class="section section-pink" data-reveal>
+    <div class="section-label">
+      <div class="section-line" style="color:var(--pink)"></div>
+      <span class="section-title pink">Schüler*innen&nbsp;Stände</span>
+      <div class="section-line right" style="color:var(--pink)"></div>
+    </div>
+    <span class="payment-badge pink">
+      <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+      Nur Barbezahlung
+    </span>
+    <div class="items">
+      <div class="item">
+        <div class="item-info"><span class="item-name">Bauernhofglace</span></div>
+        <div class="item-price-wrap"><span class="item-price">4.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Popcorn</span></div>
+        <div class="item-price-wrap"><span class="item-price">1.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Hot Dog</span><span class="item-size">Pouletwürstli &amp; Vegiwürstli</span></div>
+        <div class="item-price-wrap"><span class="item-price">5.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Diverse Salate</span></div>
+        <div class="item-price-wrap"><span class="item-price">7.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Waffeln</span></div>
+        <div class="item-price-wrap"><span class="item-price">3.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Pancakes</span></div>
+        <div class="item-price-wrap"><span class="item-price">3.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Kaffee</span></div>
+        <div class="item-price-wrap"><span class="item-price">3.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Mocktails</span></div>
+        <div class="item-price-wrap"><span class="item-price">3.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Sirupbar</span></div>
+        <div class="item-price-wrap">
+          <span class="item-price">2.–</span>
+          <span class="item-depot">+ 2.– Depot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Elternratsstand -->
+  <div class="section section-gold" data-reveal>
+    <div class="section-label">
+      <div class="section-line" style="color:var(--gold)"></div>
+      <span class="section-title gold">Elternratsstand</span>
+      <div class="section-line right" style="color:var(--gold)"></div>
+    </div>
+    <span class="payment-badge gold">
+      <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 6h6"/></svg>
+      Bar &amp; Twint
+    </span>
+    <div class="items">
+      <div class="item">
+        <div class="item-info"><span class="item-name">Pommes Frites</span></div>
+        <div class="item-price-wrap"><span class="item-price">7.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Bratwurst (Kalb)</span></div>
+        <div class="item-price-wrap"><span class="item-price">7.–</span></div>
+      </div>
+      <div class="item featured">
+        <div class="item-info"><span class="item-name">Hamburger (Rind)</span></div>
+        <div class="item-price-wrap"><span class="item-price">9.–</span></div>
+      </div>
+      <div class="item">
+        <div class="item-info"><span class="item-name">Paella mit Gemüse</span></div>
+        <div class="item-price-wrap"><span class="item-price">7.–</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-title">Viel Spass!</div>
+  <p>Schuldisco 2026 &nbsp;·&nbsp; Speisekarte</p>
+</footer>
+
+<script>
+// ─── DISCO BALL TILES ───
+const ball = document.getElementById('ball');
+const colors = [
+  '#00f0ff','#ff2070','#ffd060','#a855f7','#00ff99',
+  '#ff6030','#40c8ff','#ff40a0','#fff','#c0e0ff',
+  '#ffb0d0','#80ffee','#ffe080','#d0b0ff','#ffffff',
+  '#88ddff'
+];
+for (let i = 0; i < 64; i++) {
+  const d = document.createElement('div');
+  const c = colors[Math.floor(Math.random() * colors.length)];
+  d.style.cssText = `background:${c};opacity:${0.5 + Math.random()*0.5}`;
+  ball.appendChild(d);
+}
+
+// ─── CANVAS: PARTICLES + LASER BEAMS ───
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], beams = [];
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Particles
+for (let i = 0; i < 120; i++) {
+  particles.push({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    r: 0.5 + Math.random() * 1.5,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    hue: Math.random() * 360,
+    alpha: 0.2 + Math.random() * 0.6
+  });
+}
+
+// Laser beams
+const beamColors = ['#00f0ff','#ff2070','#ffd060','#a855f7'];
+for (let i = 0; i < 6; i++) {
+  beams.push({
+    angle: Math.random() * Math.PI * 2,
+    speed: (0.002 + Math.random() * 0.004) * (Math.random() > 0.5 ? 1 : -1),
+    color: beamColors[i % beamColors.length],
+    width: 0.5 + Math.random() * 1,
+    alpha: 0.12 + Math.random() * 0.1,
+    length: 0.4 + Math.random() * 0.4
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Large ambient orbs
+  const t = Date.now() / 4000;
+  const orbData = [
+    { x: 0.25, y: 0.3,  color: '#9b30ff', r: 0.45 },
+    { x: 0.75, y: 0.6,  color: '#ff2070', r: 0.38 },
+    { x: 0.5,  y: 0.15, color: '#00f0ff', r: 0.3  }
+  ];
+  orbData.forEach(o => {
+    const ox = W * o.x + Math.sin(t + o.r) * 60;
+    const oy = H * o.y + Math.cos(t * 0.8 + o.r) * 40;
+    const gr = ctx.createRadialGradient(ox, oy, 0, ox, oy, W * o.r);
+    gr.addColorStop(0, o.color + '30');
+    gr.addColorStop(1, 'transparent');
+    ctx.fillStyle = gr;
+    ctx.fillRect(0, 0, W, H);
+  });
+
+  // Laser beams from top center (disco ball position)
+  const bx = W / 2, by = 200;
+  beams.forEach(b => {
+    b.angle += b.speed;
+    const ex = bx + Math.cos(b.angle) * W * b.length;
+    const ey = by + Math.sin(b.angle) * H * b.length;
+    ctx.beginPath();
+    ctx.moveTo(bx, by);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = b.color;
+    ctx.globalAlpha = b.alpha;
+    ctx.lineWidth = b.width;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  });
+
+  // Particles
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${p.hue},100%,80%,${p.alpha})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // stagger children
+      e.target.querySelectorAll('.item').forEach((item, i) => {
+        item.style.transitionDelay = (i * 0.05) + 's';
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-10px)';
+        setTimeout(() => {
+          item.style.transition = 'opacity 0.4s ease, transform 0.4s ease, background 0.25s, border-color 0.25s';
+          item.style.opacity = '1';
+          item.style.transform = '';
+        }, 50 + i * 60);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
