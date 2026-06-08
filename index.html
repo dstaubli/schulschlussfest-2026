@@ -244,26 +244,33 @@ h1::after {
 
 /* ── BACK BUTTON ── */
 .back-btn {
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin: 1.5rem 1.5rem 0;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  color: rgba(255,255,255,0.6);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  gap: 0.35rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 0 0 8px 0;
+  background: rgba(255,255,255,0.07);
+  border-right: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.2s, background 0.2s, border-color 0.2s;
-  backdrop-filter: blur(8px);
+  transition: background 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(16px);
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.35);
 }
-.back-btn:hover { color: #fff; background: var(--glass2); border-color: rgba(255,255,255,0.25); }
-.back-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.back-btn:hover {
+  background: rgba(255,255,255,0.22);
+  box-shadow: 2px 2px 20px rgba(0,240,255,0.2);
+}
+.back-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── MENU ── */
 .menu {
@@ -271,7 +278,7 @@ h1::after {
   z-index: 2;
   max-width: 760px;
   margin: 0 auto;
-  padding: 0 1.5rem 6rem;
+  padding: 3rem 1.5rem 6rem;
 }
 
 /* ── SECTION ── */
@@ -434,7 +441,7 @@ h1::after {
 /* ── PROGRAMM ── */
 .programm-wrap {
   position: relative; z-index: 2;
-  max-width: 760px; margin: 0 auto; padding: 0 1.5rem 6rem;
+  max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 6rem;
 }
 
 .programm-intro {
@@ -637,14 +644,14 @@ footer p { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
             <div class="combo-item-info">
               <span class="combo-item-name"><span class="item-emoji">🥤</span>Natur, Citro, Orange, Rivella, Cola, Cola Zero, Ice Tea</span>
               <div class="combo-drinks">
-                <div class="combo-drink-row"><span class="combo-drink-size">3 dl</span><span class="combo-price">3.–</span></div>
-                <div class="combo-drink-row"><span class="combo-drink-size">1.5 l</span><span class="combo-price">9.–</span></div>
+                <div class="combo-drink-row"><span class="combo-drink-size">3 dl (Becher)</span><span class="combo-price">3.–</span></div>
+                <div class="combo-drink-row"><span class="combo-drink-size">1.5 l (Flasche)</span><span class="combo-price">9.–</span></div>
               </div>
             </div>
           </div>
           <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍺</span>Alkoholfreies Bier</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">4.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
-          <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍺</span>Bier (mit Alkohol)</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">5.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
-          <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍷</span>Wein (Flasche)</span><span class="item-size">5 dl</span></div><div class="item-price-wrap"><span class="item-price">14.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
+          <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍺</span>Bier mit Alkohol</span><span class="item-size">33 cl</span></div><div class="item-price-wrap"><span class="item-price">5.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
+          <div class="item"><div class="item-info"><span class="item-name"><span class="item-emoji">🍷</span>Wein</span><span class="item-size">5 dl (Flasche)</span></div><div class="item-price-wrap"><span class="item-price">14.–</span><span class="item-depot">+ 2.– Depot</span></div></div>
         </div>
       </div>
     </div>
