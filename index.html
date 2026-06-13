@@ -29,14 +29,6 @@ body::after {
   background-size: 200px 200px;
 }
 
-/* ── PAGE TRANSITIONS ── */
-.view { display: none; opacity: 0; }
-.view.active { display: block; }
-@keyframes viewIn  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-@keyframes viewOut { from { opacity: 1; } to { opacity: 0; } }
-.view.fading-in  { animation: viewIn  0.35s ease forwards; }
-.view.fading-out { animation: viewOut 0.2s ease forwards; pointer-events: none; display: block !important; }
-
 /* ── SILVER STRING ── */
 .disco-string {
   position: absolute;
@@ -64,7 +56,7 @@ body::after {
 }
 .live-clock-time {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.8rem; letter-spacing: 0.1em;
+  font-size: 1.8rem; letter-spacing: 0.1em;
   background: linear-gradient(90deg, var(--cyan), #fff, var(--pink));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   line-height: 1;
@@ -127,6 +119,8 @@ body {
 }
 
 /* ── VIEWS ── */
+.view { display: none; }
+.view.active { display: block; }
 
 /* ── HERO ── */
 .hero {
@@ -1145,26 +1139,16 @@ draw();
 setTimeout(launchConfetti, 600);
 setupFooterObserver();
 
-// ── PAGE TRANSITIONS ──
+// ── VIEW SWITCHING ──
 function showView(name) {
-  const current = document.querySelector('.view.active');
   const targetId = 'view-' + (name === 'home' ? 'home' : name === 'speise' ? 'speise' : 'programm');
-  const next = document.getElementById(targetId);
-  if (current === next) return;
-
-  // Manage disco beams
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(targetId).classList.add('active');
+  window.scrollTo(0, 0);
   document.getElementById('beam-canvas').classList.toggle('active', name === 'home');
-
-  current.classList.add('fading-out');
-  setTimeout(() => {
-    current.classList.remove('active', 'fading-out');
-    next.classList.add('active', 'fading-in');
-    window.scrollTo(0, 0);
-    setTimeout(() => next.classList.remove('fading-in'), 400);
-    if (name === 'home') setTimeout(launchConfetti, 200);
-    if (name === 'speise') { setupReveal(); setTimeout(addTapListeners, 800); setupFooterObserver(); }
-    if (name === 'programm') { setupProgram(); setupFooterObserver(); }
-  }, 220);
+  if (name === 'home') setTimeout(launchConfetti, 200);
+  if (name === 'speise') { setupReveal(); setTimeout(addTapListeners, 800); setupFooterObserver(); }
+  if (name === 'programm') { setupProgram(); setupFooterObserver(); }
 }
 
 // ── DISCO BEAMS ──
